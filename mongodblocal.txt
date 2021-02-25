@@ -1,0 +1,2 @@
+otwieramy gitbush z poleceniem mongod
+otwieramy gitbush z poleceniem mongo
