@@ -1,10 +1,12 @@
 const Product = require('../models/product')
 const ErrorHandler = require("../utils/ErrorHandler")
+const catchAsynchErrors = require("../middlewares/catchAsyncErrors")
 
 
 
 
-exports.getProducts = async (req, res, next) => {
+
+exports.getProducts = catchAsynchErrors(async (req, res, next) => {
 
     const products = await Product.find()
     const productsCount = await Product.countDocuments();
@@ -16,10 +18,10 @@ exports.getProducts = async (req, res, next) => {
 
 
     })
-}
+})
 
 
-exports.newProduct = async (req, res, next) => {
+exports.newProduct = catchAsynchErrors(async (req, res, next) => {
 
     const product = await Product.create(req.body);
 
@@ -27,9 +29,9 @@ exports.newProduct = async (req, res, next) => {
         success: true,
         product
     })
-}
+})
 
-exports.getSingleProduct = async (req, res, next) => {
+exports.getSingleProduct = catchAsynchErrors(async (req, res, next) => {
     const product = await Product.findById(req.params.id)
     console.log(product)
 
@@ -41,12 +43,12 @@ exports.getSingleProduct = async (req, res, next) => {
         success: true,
         product
     })
-}
+})
 
 
 
 // Update Product   =>   /api/v1/admin/product/:id
-exports.updateProduct = async (req, res, next) => {
+exports.updateProduct = catchAsynchErrors(async (req, res, next) => {
     let product = await Product.findById(req.params.id);
 
     if (!product) {
@@ -62,10 +64,10 @@ exports.updateProduct = async (req, res, next) => {
         success: true,
         product
     })
-}
+})
 
 // Delete Product   =>   /api/v1/admin/product/:id
-exports.deleteProduct = async (req, res, next) => {
+exports.deleteProduct = catchAsynchErrors(async (req, res, next) => {
 
     let product = await Product.findById(req.params.id);
     if (!product) {
@@ -76,4 +78,4 @@ exports.deleteProduct = async (req, res, next) => {
         message: "Pomyślnie usunięto poniższy produkt",
         product
     })
-}
+})
