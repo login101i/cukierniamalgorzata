@@ -1,4 +1,6 @@
 const Product = require('../models/product')
+const ErrorHandler = require("../utils/ErrorHandler")
+
 
 
 
@@ -32,10 +34,8 @@ exports.getSingleProduct = async (req, res, next) => {
     console.log(product)
 
     if (!product) {
-        res.status(404).json({
-            success: false,
-            message: "Nie znaleziono produktu"
-        })
+        // constructor(message, statusCode)
+        return next(new ErrorHandler("Nie odnaleziono produktu", 404))
     }
     res.status(200).json({
         success: true,
@@ -50,10 +50,7 @@ exports.updateProduct = async (req, res, next) => {
     let product = await Product.findById(req.params.id);
 
     if (!product) {
-        res.status(404).json({
-            success: false,
-            message: "Nie znaleziono produktu"
-        })
+        return next(new ErrorHandler("Nie odnaleziono produktu takiego produktu do zaktualizowania", 404))
     }
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
@@ -72,10 +69,7 @@ exports.deleteProduct = async (req, res, next) => {
 
     let product = await Product.findById(req.params.id);
     if (!product) {
-        res.status(404).json({
-            success: false,
-            message: "Nie znaleziono produktu"
-        })
+        return next(new ErrorHandler("Nie odnaleziono produktu do usunięcia", 404))
     }
     product = await product.remove()
     res.status(200).json({
