@@ -20,6 +20,18 @@ module.exports = (err, req, res, next) => {
 
         error.message = err.message;
 
+        // Wrong Mongoose Object ID Error
+        if (err.name === 'CastError') {
+            const message = `Nie znaleziono źródła  tzn takiego adresu http ... np, w mongodB wprowadziłeś nieparwidłowy adres, pewnie jest literówka.. Problem czy też tę literówkę znajdziesz tutaj ------->: ${err.path}`
+            error = new ErrorHandler(message, 400)
+        }
+
+        // Handling Mongoose Validation Error
+        if (err.name === 'ValidationError') {
+            const message = Object.values(err.errors).map(value => value.message);
+            error = new ErrorHandler(message, 400)
+        }
+
         res.status(error.statusCode || 500).json({
             success: false,
             message: error.message || 'Wewnętrzny błąd serwera :)'
