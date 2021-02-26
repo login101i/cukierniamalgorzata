@@ -60,6 +60,7 @@ const productSchema= new mongoose.Schema({
     },
     reviews: [
         {
+            // user you should add on this stage because we implement adding review function
             user: {
                 type: mongoose.Schema.ObjectId,
                 ref: 'User',
