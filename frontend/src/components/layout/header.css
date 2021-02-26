@@ -1,0 +1,59 @@
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px;
+  z-index: 1;
+  /* Animation */
+
+  transition: all ease-in-out 0.5s;
+
+}
+
+.nav_black {
+  background-color: #111 !important;
+}
+
+.nav_form{
+    margin-top: 10px;
+    height: 44px;
+}
+
+.nav_logoLeft {
+  position: fixed;
+
+  left: 0px;
+  width: 80px;
+  object-fit: contain;
+  margin-top:-15px;
+}
+
+.nav_logoRight {
+  position: fixed;
+  right: 80px;
+  width:300px;
+  object-fit: contain;
+  color:rgba(255, 255, 255, 0.801);
+  font-size: 2rem;
+  transition:all ease-in-out 0.3s;
+}
+.nav_logoRight:hover{
+  color: white;
+}
+
+.nav_white{
+  color:white !important;
+  background:rgb(223, 222, 222);
+}
+.myFafourite{
+  color:rgb(49, 49, 49);
+}
+
+.myFavourite_white{
+  color:white !important;
+}
+
+li.active :hover{
+text-decoration: none;
+color:rgb(0, 0, 0);
+}
