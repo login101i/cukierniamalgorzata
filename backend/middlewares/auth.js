@@ -20,3 +20,14 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     next()
 })
 
+// Handling users roles
+exports.authorizeRoles = (...roles) => {
+    return (req, res, next) => {
+        if (!roles.includes(req.user.role)) {
+            return next(
+                new ErrorHandler(` (${req.user.role}) nie jest upoważniony do wglądu tych plików`, 403))
+        }
+        next()
+    }
+}
+
