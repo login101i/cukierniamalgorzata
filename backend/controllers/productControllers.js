@@ -34,6 +34,9 @@ exports.getProducts = catchAsynchErrors(async (req, res, next) => {
 
 exports.newProduct = catchAsynchErrors(async (req, res, next) => {
 
+      // teraz dodaliśmy do modelu produktu user'a i możemy do req.body.user przypisać id użytkownika zalogowanego czyli req.user.id
+    req.body.user=req.user.id;
+
     const product = await Product.create(req.body);
 
     res.status(201).json({
