@@ -3,6 +3,8 @@ const User = require('../models/user');
 const ErrorHandler = require('../utils/ErrorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const sendToken = require('../utils/jwtToken');
+const sendEmail = require('../utils/sendEmail');
+
 
 
 // Register a user   => /api/v1/register
@@ -52,7 +54,6 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler('Niepoprawne hasło lub login.', 401));
     }
 
-    const token = user.getJwtToken()
     sendToken(user, 200, res)
 })
 
@@ -67,6 +68,46 @@ exports.logoutUser = catchAsyncErrors(async (req, res, next) => {
         success: true,
         message: 'Wylogowano użytkownika'
     })
+})
+
+// Forgot Password   =>  /api/v1/password/forgot
+exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
+
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+        return next(new ErrorHandler('Użytkownik nie został znaleziony pod tym adresem email', 404));
+    }
+
+    // Get reset token
+    const resetToken = user.getResetPasswordToken();
+
+    await user.save({ validateBeforeSave: false });
+
+    // Create reset password url
+    const resetUrl = `${req.protocol}://${req.get('host')}/password/reset/${resetToken}`;
+
+
+    const message = `Twoje hasło resetujące token jest następujące:\n\n${resetUrl}\n\nJeśli nie chciałeś resetowego email, zignoruj tę wiadomość.`
+
+    try {
+        // try also node.js botcamp from Ghulam Abbas whter he send email using gmail
+        await sendEmail({
+            email: user.email,
+            subject: 'Cukiernia Małgorzata - prośba o reset Hasła',
+            message
+        })
+        res.status(200).json({
+            success: true,
+            message: `Email został wysłany do: ${user.email}`
+        })
+    } catch (error) {
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+
+        await user.save({ validateBeforeSave: false });
+        return next(new ErrorHandler(error.message, 500))
+    }
 })
 
 
