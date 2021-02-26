@@ -123,7 +123,8 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
     })
 
     if (!user) {
-        return next(new ErrorHandler('Hasło resetujące jest nieprawidłowe lub token wygasł', 400)) }
+        return next(new ErrorHandler('Hasło resetujące jest nieprawidłowe lub token wygasł', 400))
+    }
 
     if (req.body.password !== req.body.confirmPassword) {
         return next(new ErrorHandler('Hasło nie pasuje koleżko.', 400))
@@ -214,7 +215,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 // Get all users   =>   /api/v1/admin/users
 exports.allUsers = catchAsyncErrors(async (req, res, next) => {
     const users = await User.find();
-    usersCount=users.length
+    const usersCount = users.length
 
     res.status(200).json({
         success: true,
@@ -270,6 +271,6 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        message:"Usunięto użytkownika z sukcesem"
+        message: "Usunięto użytkownika z sukcesem"
     })
 })
