@@ -7,13 +7,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import {getProducts} from '../actions/productActions.js'
 import Product from "../components/product/Product"
 
+import { useAlert } from 'react-alert'
+
+
 
 const Home = () => {
     const dispatch = useDispatch();
+    const alert = useAlert()
+
 
     useEffect(() => {
         if (error) {
             return alert.error(error)
+            // to powinno być dodane teraz
         }
         dispatch(getProducts());
     }, [dispatch])
