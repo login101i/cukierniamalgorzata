@@ -1,10 +1,10 @@
-import React, { Fragment, useEffect} from 'react'
+import React, { Fragment, useEffect } from 'react'
 import Loader from './layout/Loader'
 import MetaData from './layout/MetaData'
 import './home.css'
 
 import { useDispatch, useSelector } from 'react-redux'
-import {getProducts} from '../actions/productActions.js'
+import { getProducts } from '../actions/productActions.js'
 import Product from "../components/product/Product"
 
 import { useAlert } from 'react-alert'
@@ -37,8 +37,7 @@ const Home = () => {
                 <Fragment>
                     <MetaData title={'Cukiernia Małgorzata'} />
                     <div className="container-fluid home">
-                        <h1 id="products_heading">Cukiernia Małgorzata</h1>
-
+                        <h1 id="products_heading" style={{ paddingTop: "80px" }}>Cukiernia Małgorzata</h1>
                         <section id="products" className="container mt-5">
                             <div className="row">
                                 {products && products.map(product => (

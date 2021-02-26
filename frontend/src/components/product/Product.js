@@ -6,14 +6,14 @@ const Product = ({ product }) => {
     console.log(product)
     return (
         <div className={`col-sm-12 col-md-6 col-lg-3 my-3`}>
-            <div className="card p-3 rounded">
+            <div className="card p-3 rounded d-flex flex-column align-items-center justify-content-center">
                 <Link to={`/product/${product._id}`} id="view_btn"
                     className="img-fluid" >
                     <img src={product.images[0].url}
                         className="img-fluid"
                         style={{ objectFit: 'cover', height: '222px' }}
                         alt="obrazek"
-                        />
+                    />
                 </Link>
                 <div className="card-body d-flex flex-column">
                     <h5 className="card-title">
