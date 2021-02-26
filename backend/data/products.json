@@ -143,15 +143,14 @@
         "images": [
             {
                 "public_id": "products/wmoa49q9e70ze9xtcra2",
-                "url": "https://res.cloudinary.com/shopit/image/upload/v1606231282/products/wmoa49q9e70ze9xtcra2.jpg"
+                "url": "https://4rooms.com.pl/userdata/public/gfx/1279cded36c5a39ffac5a8b86ffa654c.jpg"
             },
             {
                 "public_id": "products/i0k1wdwi5hrpmzwxvsds",
-                "url": "https://res.cloudinary.com/shopit/image/upload/v1606231282/products/i0k1wdwi5hrpmzwxvsds.jpg"
+                "url": "https://4rooms.com.pl/userdata/public/gfx/1279cded36c5a39ffac5a8b86ffa654c.jpg"
             },
             {
-                "public_id": "products/bshmuo9qisfhz4azvnsd",
-                "url": "https://res.cloudinary.com/shopit/image/upload/v1606231282/products/bshmuo9qisfhz4azvnsd.jpg"
+                "public_id": "https://4rooms.com.pl/userdata/public/gfx/1279cded36c5a39ffac5a8b86ffa654c.jpg"
             }
         ],
         "category": "Ciasta",

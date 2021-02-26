@@ -46,14 +46,6 @@ const Nav = ({ history }) => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
 
-                        <li className="nav-item active mt-1 ml-4 h4 d-flex justify-content-center">
-                            <Link to='/favourites'>
-                                <div className={`myFavourite ${show && "myFavourite_white"}`}
-
-                                >My Favourites Movies</div>
-                            </Link>
-                        </li>
-
 
                     </ul>
                     <form className="nav_form"  >

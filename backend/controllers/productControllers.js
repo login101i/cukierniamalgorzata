@@ -20,6 +20,8 @@ exports.getProducts = catchAsynchErrors(async (req, res, next) => {
 
     let products = await apiFeatures.query;
 
+    
+
 
     res.status(200).json({
         success: true,
