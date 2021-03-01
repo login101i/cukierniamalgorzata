@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
 
-const Product = ({ loading, product }) => {
+const Product = ({ loading, product, col }) => {
 
     console.log(product)
     return (
@@ -12,7 +12,7 @@ const Product = ({ loading, product }) => {
             {loading ? <Loader /> :
                 <Fragment>
                     <MetaData title={product.name} />
-                    <div className={`col-sm-12 col-md-6 col-lg-3 my-3`}>
+                    <div className={`col-sm-12 col-md-${col} col-lg-${col} my-3`}>
                         <div className="card p-3 rounded d-flex flex-column align-items-center justify-content-center">
                             <Link to={`/product/${product._id}`} id="view_btn"
                                 className="img-fluid" >

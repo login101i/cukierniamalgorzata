@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getProductDetails, clearErrors } from '../../actions/productActions'
 
 
-const ProductDetails = ({ match }) => {
+const ProductDetails = ({ match}) => {
 
 
     const dispatch = useDispatch();
