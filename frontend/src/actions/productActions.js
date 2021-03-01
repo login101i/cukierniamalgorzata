@@ -14,7 +14,7 @@ import {
 
 } from '../constants/productConstants'
 
-export const getProducts = () => async (dispatch) => {
+export const getProducts = (activePage=1) => async (dispatch) => {
     try {
 
         dispatch({
@@ -23,7 +23,7 @@ export const getProducts = () => async (dispatch) => {
 
        
 
-        const { data } = await axios.get(`/api/v1/products`)
+        const { data } = await axios.get(`/api/v1/products?page=${activePage}`)
         console.log("Info z getProducts w action", data)
 
         dispatch({

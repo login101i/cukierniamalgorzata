@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Loader from './layout/Loader'
 import MetaData from './layout/MetaData'
 import './home.css'
@@ -8,6 +8,7 @@ import { getProducts } from '../actions/productActions.js'
 import Product from "../components/product/Product"
 
 import { useAlert } from 'react-alert'
+import Pagination from 'react-js-pagination'
 
 
 
@@ -15,19 +16,32 @@ const Home = () => {
     const dispatch = useDispatch();
     const alert = useAlert()
 
+    const [activePage, setActivePage] = useState(1)
+
+
+    const {
+        loading,
+        products,
+        error,
+        productsCount,
+        resPerPage
+    } = useSelector(state => state.products)
 
     useEffect(() => {
         if (error) {
             return alert.error(error)
             // to powinno być dodane teraz
         }
-        dispatch(getProducts());
-    }, [dispatch])
+        dispatch(getProducts(activePage));
+    }, [dispatch, activePage, error])
 
 
 
-    const { loading, products, error, productsCount, resPerPage } = useSelector(state => state.products)
 
+
+    const setCurrentPageNo = (value) => {
+        setActivePage(value)
+    }
 
 
 
@@ -49,10 +63,25 @@ const Home = () => {
                     </div>
                 </Fragment>
             )}
+            {resPerPage >= productsCount ? "" :
 
-            <div className="d-flex justify-content-center mt-5">
 
-            </div>
+                <Fragment>
+                    <div className="d-flex justify-content-center mt-5">
+                        <Pagination
+                            activePage={activePage}
+                            itemsCountPerPage={resPerPage}
+                            totalItemsCount={productsCount}
+                            onChange={setCurrentPageNo}
+                            nextPageText={'Następna strona'}
+                            prevPageText={'Poprzednia strona'}
+                            itemClass="page-item"
+                            linkClass="page-link"
+                        />
+                    </div>
+                </Fragment>
+            }
+
         </Fragment>
     )
 }

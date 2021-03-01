@@ -10,7 +10,7 @@ const APIFeatures = require("../utils/apiFeatures")
 // Get all products   =>   /api/v1/products?keyword=apple
 exports.getProducts = catchAsynchErrors(async (req, res, next) => {
 
-    const resPerPage = 9;
+    const resPerPage = 6;
     const productsCount = await Product.countDocuments();
 
     const apiFeatures = new APIFeatures(Product.find(), req.query)
@@ -20,9 +20,6 @@ exports.getProducts = catchAsynchErrors(async (req, res, next) => {
 
     let products = await apiFeatures.query;
 
-    
-
-
     res.status(200).json({
         success: true,
         productsCount,
@@ -30,14 +27,11 @@ exports.getProducts = catchAsynchErrors(async (req, res, next) => {
         resPerPage
     })
 
-
 })
 
-
 exports.newProduct = catchAsynchErrors(async (req, res, next) => {
-
-      // teraz dodaliśmy do modelu produktu user'a i możemy do req.body.user przypisać id użytkownika zalogowanego czyli req.user.id
-    req.body.user=req.user.id;
+    // teraz dodaliśmy do modelu produktu user'a i możemy do req.body.user przypisać id użytkownika zalogowanego czyli req.user.id
+    req.body.user = req.user.id;
 
     const product = await Product.create(req.body);
 
@@ -98,7 +92,7 @@ exports.deleteProduct = catchAsynchErrors(async (req, res, next) => {
 
 // --------------------------------------------------------
 
-    // / / Create new review   => /api / v1 / review
+// / / Create new review   => /api / v1 / review
 exports.createProductReview = catchAsynchErrors(async (req, res, next) => {
     const { rating, comment, productId } = req.body;
     const review = {
@@ -134,7 +128,7 @@ exports.createProductReview = catchAsynchErrors(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        message:`Twoja dodana opinia to: ${comment} z oceną ${rating}`
+        message: `Twoja dodana opinia to: ${comment} z oceną ${rating}`
     })
 })
 

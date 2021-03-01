@@ -33,31 +33,31 @@ const ProductDetails = ({ match }) => {
             {loading ? <Loader /> : (
                 <Fragment>
                     <MetaData title={product.name} />
-                    <div className="row d-flex justify-content-around">
+                    <div className="row d-flex justify-content-around p-3">
                         <div className="col-12 col-lg-5 img-fluid" id="product_image">
                             <Carousel pause='hover'>
+
                                 {product.images && product.images.map(image => (
                                     <Carousel.Item key={image.public_id}>
                                         <img className="d-block w-100" src={image.url} alt={product.title} />
                                     </Carousel.Item>
                                 ))}
+
                             </Carousel>
                         </div>
 
-                        <div className="col-12 col-lg-5 mt-5">
+                        <div className="col-12 col-lg-5 mt-5 ">
                             <h3>{product.name}</h3>
                             <p id="product_id">Product # {product._id}</p>
-
                             <hr />
 
                             <div className="rating-outer">
                                 <div className="rating-inner" style={{ width: `${(product.ratings / 5) * 100}%` }}></div>
                             </div>
                             <span id="no_of_reviews">({product.numOfReviews} Reviews)</span>
-
                             <hr />
 
-                            <p id="product_price">${product.price}</p>
+                            <p id="product_price">{product.price} zł</p>
                             <div className="stockCounter d-inline">
                                 <span className="btn btn-danger minus">-</span>
 
@@ -69,7 +69,7 @@ const ProductDetails = ({ match }) => {
 
                             <hr />
 
-                            <p>Status: <span id="stock_status" className={product.stock > 0 ? 'greenColor' : 'redColor'} >{product.stock > 0 ? 'In Stock' : 'Out of Stock'}</span></p>
+                            <p>Status: <span id="stock_status" className={product.stock > 0 ? 'greenColor' : 'redColor'} >{product.stock > 0 ? 'Na stanie' : 'Brak w sklepie'}</span></p>
 
                             <hr />
 
