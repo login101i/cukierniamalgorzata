@@ -3,7 +3,7 @@
 }
 
 .App{
-  background:rgb(37, 34, 34)
+  background:rgb(199, 199, 199)
 }
 
 html,
@@ -212,8 +212,8 @@ footer {
 }
 
 .rating-inner::before {
-  content: '\f005 \f005 \f005 \f005 \f005';
-  color: #f8ce0b;
+  content: '\f005 \f005 \f005 \f005 \f005' !important;
+  color: #f8ce0b !important;
 }
 
 /* Product Details Page */

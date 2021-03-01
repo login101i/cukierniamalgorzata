@@ -10,7 +10,7 @@ import Product from "../components/product/Product"
 import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
 
-import { Menu, Slider } from "antd";
+import { Menu, Slider, Checkbox } from "antd";
 import { MailOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
@@ -18,10 +18,16 @@ import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 const Home = ({ match }) => {
     const dispatch = useDispatch();
     const alert = useAlert()
+    const { SubMenu } = Menu;
+
 
     const [activePage, setActivePage] = useState(1)
     const [price, setPrice] = useState([1, 1000])
     const [filteredPrice, setFilteredPrice] = useState([1, 1000])
+    const [category, setCategory] = useState()
+    const [check, setCheck] = useState(false);
+
+
 
     const keyword = match.params.keyword
 
@@ -30,7 +36,8 @@ const Home = ({ match }) => {
         products,
         error,
         productsCount,
-        resPerPage
+        resPerPage,
+        filteredProductsCount
     } = useSelector(state => state.products)
 
 
@@ -39,14 +46,16 @@ const Home = ({ match }) => {
             return alert.error(error)
             // to powinno być dodane teraz
         }
-        dispatch(getProducts(activePage, keyword, filteredPrice));
-    }, [dispatch, activePage, error, keyword, filteredPrice])
+        dispatch(getProducts(activePage, keyword, filteredPrice, category));
+    }, [dispatch, activePage, error, keyword, filteredPrice, category])
 
     const handleSlider = (value) => {
         setPrice(value);
         setTimeout(() => {
             setFilteredPrice(price)
+            setCategory()
         }, 1000)
+
 
         // reset
         // setCategoryIds([]);
@@ -61,6 +70,28 @@ const Home = ({ match }) => {
     const setCurrentPageNo = (value) => {
         setActivePage(value)
     }
+    const categories = [
+        "Ciasta",
+        "Cukierki"
+    ]
+
+    let count = productsCount;
+    if (keyword) {
+        count = filteredProductsCount
+    }
+
+
+
+    const handleCheck = (e) => {
+        // reset
+        setPrice([0, 1000]);
+        setCheck(true)
+        setTimeout(() => {
+            setCategory(e.target.value)
+        }, 400)
+
+    };
+
 
 
     return (
@@ -70,40 +101,80 @@ const Home = ({ match }) => {
 
                 <Fragment>
                     <MetaData title={'Cukiernia Małgorzata'} />
-                    <div className="container-fluid home">
-                        <h1 id="products_heading" style={{ paddingTop: "80px" }}>Cukiernia Małgorzata</h1>
+                    <div className="container-fluid ">
+                        <div className="row d-flex justify-content-center">
+                            <h1 style={{ paddingTop: "80px" }}>Cukiernia Małgorzata</h1>
+                        </div>
 
 
                         <section id="products" className=" mt-5">
-                            <div className="row m-4">
+                            <div className="row  d-flex justify-content-between m-4">
                                 {keyword ? (
                                     <>
-                                        <div className="col-md-2 pt-2 ">
+
+
+
+                                        <div className="col-sm-12  col-md-3 mt-5 mb-5">
                                             <h2>Filtry</h2>
                                             <Menu
                                                 mode="inline"
                                                 defaultOpenKeys={["1", "2"]}
-                                                style={{ width: 256 }}
-                                            >
 
-                                                <Slider
-                                                    className="ml-4 mr-4"
-                                                    tipFormatter={(v) => `${v} zł`}
-                                                    range
-                                                    value={price}
-                                                    onChange={handleSlider}
-                                                    max="4999"
-                                                />
+                                            >
+                                                <SubMenu
+                                                    key="1"
+                                                    title={
+                                                        <span className="h6">
+                                                            Cena </span>
+                                                    }
+                                                >
+                                                    <div>
+                                                        <Slider
+                                                            className="ml-4 mr-4"
+                                                            tipFormatter={(v) => `${v} zł`}
+                                                            range
+                                                            value={price}
+                                                            onChange={handleSlider}
+                                                            max="4999"
+                                                        />
+                                                    </div>
+                                                </SubMenu>
+                                                <hr />
+                                                <SubMenu
+                                                    key="2"
+                                                    title={
+                                                        <span className="h6">
+                                                            Kategorie </span>
+                                                    }
+                                                >
+                                                    {categories.map(c => (
+                                                        <div >
+                                                            <Checkbox
+                                                                onChange={handleCheck}
+                                                                className="pb-2 pl-4 pr-4"
+                                                                value={c}
+                                                                name="category"
+                                                                checked={c === category}
+                                                            >
+                                                                {c}
+                                                            </Checkbox>
+                                                        </div>
+                                                    ))}
+
+                                                </SubMenu>
                                             </Menu>
                                         </div>
-                                        <div className="col-md-9 pt-2">
-                                            <div className="row">
+                                        <div className="col-sm-12 col-md-9 ">
+                                            <div className="row ">
                                                 {products && products.map(product => (
                                                     <Product product={product} col={4} />
                                                 ))}
                                             </div>
+
                                         </div>
+
                                     </>
+
                                 ) : (
                                         products && products.map(product => (
                                             <Product product={product} col={3} />
@@ -114,28 +185,30 @@ const Home = ({ match }) => {
 
                     </div>
                 </Fragment>
-            )}
-
-
-            {resPerPage >= productsCount ? "" :
-
-                <Fragment>
-                    <div className="d-flex justify-content-center mt-5">
-                        <Pagination
-                            activePage={activePage}
-                            itemsCountPerPage={resPerPage}
-                            totalItemsCount={productsCount}
-                            onChange={setCurrentPageNo}
-                            nextPageText={'Następna strona'}
-                            prevPageText={'Poprzednia strona'}
-                            itemClass="page-item"
-                            linkClass="page-link"
-                        />
-                    </div>
-                </Fragment>
+            )
             }
 
-        </Fragment>
+
+            {
+                resPerPage >= count ? "" :
+
+                    <Fragment>
+                        <div className="d-flex justify-content-center mt-5">
+                            <Pagination
+                                activePage={activePage}
+                                itemsCountPerPage={resPerPage}
+                                totalItemsCount={productsCount}
+                                onChange={setCurrentPageNo}
+                                nextPageText={'Następna strona'}
+                                prevPageText={'Poprzednia strona'}
+                                itemClass="page-item"
+                                linkClass="page-link"
+                            />
+                        </div>
+                    </Fragment>
+            }
+
+        </Fragment >
     )
 }
 

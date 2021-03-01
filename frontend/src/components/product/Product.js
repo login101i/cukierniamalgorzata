@@ -12,13 +12,13 @@ const Product = ({ loading, product, col }) => {
             {loading ? <Loader /> :
                 <Fragment>
                     <MetaData title={product.name} />
-                    <div className={`col-sm-12 col-md-${col} col-lg-${col} my-3`}>
+                    <div className={`col-sm-12 col-md-6 col-lg-${col} my-3`}>
                         <div className="card p-3 rounded d-flex flex-column align-items-center justify-content-center">
                             <Link to={`/product/${product._id}`} id="view_btn"
                                 className="img-fluid" >
                                 <img src={product.images[0].url}
                                     className="img-fluid"
-                                    style={{ objectFit: 'cover', height: '222px' }}
+                                    style={{ objectFit: 'cover', minWith: '222px' }}
                                     alt="obrazek"
                                 />
                             </Link>
@@ -30,10 +30,12 @@ const Product = ({ loading, product, col }) => {
                                     <div className="rating-outer">
                                         <div className="rating-inner" style={{ width: `${(product.ratings / 5) * 100}%` }}></div>
                                     </div>
-                                    <span id="no_of_reviews">({product.numOfReviews} Reviews)</span>
+                                    <span id="no_of_reviews">({product.numOfReviews} Oceny)</span>
                                 </div>
                                 <p className="card-text">${product.price}</p>
-                                <Link to={`/product/${product._id}`} id="view_btn" className="btn btn-block">View Details</Link>
+                                <Link to={`/product/${product._id}`} id="view_btn" className="btn btn-info btn-block"
+                                    style={{ color: 'white', background: '#fdcc0d' }}
+                                >Szczegóły</Link>
                             </div>
                         </div>
                     </div>

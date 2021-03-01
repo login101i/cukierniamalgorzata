@@ -9,20 +9,24 @@ import {
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
 
-    
+
     CLEAR_ERRORS
 
 } from '../constants/productConstants'
 
-export const getProducts = (activePage=1, keyword='', price) => async (dispatch) => {
+export const getProducts = (activePage = 1, keyword = '', price=[1,1000], category) => async (dispatch) => {
 
     try {
         dispatch({
             type: ALL_PRODUCTS_REQUEST
         })
+        let link = `/api/v1/products?page=${activePage}&keyword=${keyword}&price[lte]=${price[1]}&price[gte]=${price[0]}`
 
+        if (category) {
+            link = `/api/v1/products?page=${activePage}&keyword=${keyword}&price[lte]=${price[1]}&price[gte]=${price[0]}&category=${category}`
+        }
 
-        const { data } = await axios.get(`/api/v1/products?page=${activePage}&keyword=${keyword}&price[lte]=${price[1]}&price[gte]=${price[0]}`)
+        const { data } = await axios.get(link)
         console.log("Info z getProducts w action", data)
 
         dispatch({

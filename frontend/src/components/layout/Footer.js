@@ -8,7 +8,7 @@ const Footer = () => {
 
             <div className="row-12 d-flex justify-content-center align-items-center pb-2">
                 <div>
-                    &copy; Copyright 2021 Movie Data Base by login101i
+                    &copy; Copyright 2021 Cukiernia Małgorzata by login101i
 
                 </div>
 
