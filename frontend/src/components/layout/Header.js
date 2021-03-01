@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './header.css'
+import Search from './Search'
+import {Route } from 'react-router-dom'
 
 
 const Header = () => {
     const [show, setShow] = useState()
     // const [search, setSearch] = useState()
 
- 
+
 
     // console.log("To jest wynik wyszukiwania:-------", search)
 
@@ -23,18 +25,18 @@ const Header = () => {
         // }
     }, []);
 
-  
+
 
     return (
         <>
             <nav className={`navbar navbar-expand-lg navbar-light bg-light nav ${show && "nav_black"}  `}>
                 <Link to="/">
-                <img
-                    // className="nav_logoLeft"
-                    src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg"
-                    alt=" Movie DataBase Logo"
-                    style={{ width: '54px', marginLeft: '30px' }}
-                />
+                    <img
+                        // className="nav_logoLeft"
+                        src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg"
+                        alt=" Movie DataBase Logo"
+                        style={{ width: '54px', marginLeft: '30px' }}
+                    />
                 </Link>
 
                 <button className={`navbar-toggler ${show && " nav_white"} `} type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +48,11 @@ const Header = () => {
 
 
                     </ul>
-                    <form className="nav_form"  >
+                    <Route 
+                    render={({ history }) => <Search history={history} />}
+                    />
+
+                    {/* <form className="nav_form"  >
                         <div className="input-group">
                             <>
                                 <input
@@ -64,7 +70,7 @@ const Header = () => {
 
                         </div>
 
-                    </form>
+                    </form> */}
                 </div>
             </nav>
 

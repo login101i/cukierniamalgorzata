@@ -12,12 +12,13 @@ import Pagination from 'react-js-pagination'
 
 
 
-const Home = () => {
+const Home = ({match}) => {
     const dispatch = useDispatch();
     const alert = useAlert()
 
     const [activePage, setActivePage] = useState(1)
 
+    const keyword=match.params.keyword
 
     const {
         loading,
@@ -32,8 +33,8 @@ const Home = () => {
             return alert.error(error)
             // to powinno być dodane teraz
         }
-        dispatch(getProducts(activePage));
-    }, [dispatch, activePage, error])
+        dispatch(getProducts(activePage, keyword));
+    }, [dispatch, activePage, error, keyword])
 
 
 
