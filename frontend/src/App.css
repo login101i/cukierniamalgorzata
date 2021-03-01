@@ -172,7 +172,7 @@ nav {
 
 .ratings {
   font-size: 1.2rem;
-  color: #fdcc0d;
+  color: #fdcc0d !important;
 }
 
 #no_of_reviews {
@@ -195,11 +195,12 @@ footer {
   display: inline-block;
   position: relative;
   font-family: FontAwesome;
-  color: #fdcc0d;
+  color: #cfc8c8;
 }
 
 .rating-outer::before {
   content: '\f006 \f006 \f006 \f006 \f006';
+  
 }
 
 .rating-inner {
@@ -209,16 +210,22 @@ footer {
   white-space: nowrap;
   overflow: hidden;
   width: 0;
+  color:#e7c712 ;
+  
+
 }
 
 .rating-inner::before {
-  content: '\f005 \f005 \f005 \f005 \f005' !important;
-  color: #f8ce0b !important;
+  content: '\f005 \f005 \f005 \f005 \f005';
+  color: #e6b618 ;
+ 
 }
+
+
 
 /* Product Details Page */
 #product_id {
-  color: grey;
+  color: rgb(184, 172, 172);
   font-size: 0.8rem;
 }
 

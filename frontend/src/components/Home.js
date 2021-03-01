@@ -13,6 +13,9 @@ import Pagination from 'react-js-pagination'
 import { Menu, Slider, Checkbox } from "antd";
 import { MailOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import Star from "../components/layout/Star"
+
+
 
 
 const Home = ({ match }) => {
@@ -26,6 +29,7 @@ const Home = ({ match }) => {
     const [filteredPrice, setFilteredPrice] = useState([1, 1000])
     const [category, setCategory] = useState()
     const [check, setCheck] = useState(false);
+    const [star, setStar] = useState(0)
 
 
 
@@ -46,8 +50,8 @@ const Home = ({ match }) => {
             return alert.error(error)
             // to powinno być dodane teraz
         }
-        dispatch(getProducts(activePage, keyword, filteredPrice, category));
-    }, [dispatch, activePage, error, keyword, filteredPrice, category])
+        dispatch(getProducts(activePage, keyword, filteredPrice, category, star));
+    }, [dispatch, activePage, error, keyword, filteredPrice, category, star])
 
     const handleSlider = (value) => {
         setPrice(value);
@@ -93,7 +97,19 @@ const Home = ({ match }) => {
     };
 
 
+    const showStars = () => (
+        <div className="pr-4 pl-4 pb-2">
+            <Star starClick={handleStarClick} numberOfStars={5} />
+            <Star starClick={handleStarClick} numberOfStars={4} />
+            <Star starClick={handleStarClick} numberOfStars={3} />
+            <Star starClick={handleStarClick} numberOfStars={2} />
+            <Star starClick={handleStarClick} numberOfStars={1} />
+        </div>
+    );
 
+    const handleStarClick = (value) => {
+        setStar(value)
+    }
     return (
         <Fragment>
             {loading ? <Loader /> : (
@@ -118,7 +134,7 @@ const Home = ({ match }) => {
                                             <h2>Filtry</h2>
                                             <Menu
                                                 mode="inline"
-                                                defaultOpenKeys={["1", "2"]}
+                                                defaultOpenKeys={["1", "2", "3"]}
 
                                             >
                                                 <SubMenu
@@ -161,6 +177,17 @@ const Home = ({ match }) => {
                                                         </div>
                                                     ))}
 
+                                                </SubMenu>
+
+                                                <SubMenu
+                                                    key="3"
+                                                    title={
+                                                        <span className="h6">
+                                                            Oceny
+                </span>
+                                                    }
+                                                >
+                                                    <div style={{ maringTop: "-10px" }}>{showStars()}</div>
                                                 </SubMenu>
                                             </Menu>
                                         </div>

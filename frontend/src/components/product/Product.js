@@ -2,10 +2,13 @@ import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
+import Star from '../layout/Star'
 
 const Product = ({ loading, product, col }) => {
 
     console.log(product)
+    console.log(product.ratings)
+
     return (
 
         <Fragment>
@@ -32,7 +35,7 @@ const Product = ({ loading, product, col }) => {
                                     </div>
                                     <span id="no_of_reviews">({product.numOfReviews} Oceny)</span>
                                 </div>
-                                <p className="card-text">${product.price}</p>
+                                <p className="card-text">{product.price} zł</p>
                                 <Link to={`/product/${product._id}`} id="view_btn" className="btn btn-info btn-block"
                                     style={{ color: 'white', background: '#fdcc0d' }}
                                 >Szczegóły</Link>

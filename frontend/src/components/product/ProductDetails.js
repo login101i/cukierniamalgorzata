@@ -8,9 +8,10 @@ import MetaData from '../layout/MetaData'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductDetails, clearErrors } from '../../actions/productActions'
+import Star from '../../components/layout/Star'
 
 
-const ProductDetails = ({ match}) => {
+const ProductDetails = ({ match }) => {
 
 
     const dispatch = useDispatch();
@@ -51,10 +52,8 @@ const ProductDetails = ({ match}) => {
                             <p id="product_id">Product # {product._id}</p>
                             <hr />
 
-                            <div className="rating-outer">
-                                <div className="rating-inner" style={{ width: `${(product.ratings / 5) * 100}%` }}></div>
-                            </div>
-                            <span id="no_of_reviews">({product.numOfReviews} Reviews)</span>
+                            <Star numberOfStars={5} rating={product.ratings} />
+                            <span id="no_of_reviews">({product.numOfReviews} Oceny)</span>
                             <hr />
 
                             <p id="product_price">{product.price} zł</p>
