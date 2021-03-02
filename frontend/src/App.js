@@ -11,6 +11,8 @@ import Home from "./components/Home"
 import ProductDetails from './components/product/ProductDetails'
 import Login from './components/user/Login'
 import Register from './components/user/Register'
+import Profile from './components/user/Profile'
+
 
 
 
@@ -19,7 +21,7 @@ function App() {
   useEffect(() => {
     store.dispatch(loadUser())
   }, [])
-  
+
 
   return (
     <Router>
@@ -32,6 +34,7 @@ function App() {
         <Footer />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
+        <Route path="/me" component={Profile} exact />
 
       </div>
     </Router>
