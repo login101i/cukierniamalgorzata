@@ -7,6 +7,7 @@ import Footer from './components/layout/Footer'
 import Home from "./components/Home"
 import ProductDetails from './components/product/ProductDetails'
 import Login from './components/user/Login'
+import Register from './components/user/Register'
 
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/product/:id" component={ProductDetails} exact />
         <Footer />
         <Route path='/login' component={Login} />
+        <Route path='/register' component={Register} />
 
       </div>
     </Router>
