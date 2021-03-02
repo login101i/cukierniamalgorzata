@@ -23,7 +23,7 @@ class App extends Component {
 
         return (
             <>
-                <button onClick={this.toogleShowHide} type="button">Pokaż/Ukryj</button>
+                <Button onClick={this.toggleShowHide} text="Pokaż/Ukryj" />
                 {/* {this.state.isDisplayed ? <HelloReact1 hello={Hello} /> : null} */}
                 <HelloReact1 hello={Hello} idDisplayed={this.state.isDisplayed} />
                 <HelloReact1 hello={Hello} />
@@ -46,6 +46,12 @@ class HelloReact1 extends Component {
 const HelloReact2 = ({ hello, isDisplayed }) => {
     return (
         isDisplayed ? <h1>{hello}</h1> : null
+    )
+}
+
+const Button = ({ onClick, text }) => {
+    return (
+        <button onClick={onClick} type="button">{text}</button>
     )
 }
 
