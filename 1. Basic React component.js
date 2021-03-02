@@ -26,7 +26,7 @@ class App extends Component {
                 <button onClick={this.toogleShowHide} type="button">Pokaż/Ukryj</button>
                 {this.state.isDisplayed ? <HelloReact1 hello={Hello} /> : null}
                 <HelloReact1 hello={Hello} />
-                <HelloReact2 hello={{ text: "Witam z komponentu funkcyjnego."}} />
+                <HelloReact2 hello={{ text: "Witam z komponentu funkcyjnego :)"}} />
             </>
         )
     }
