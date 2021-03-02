@@ -39,7 +39,6 @@ const NewPassword = ({ history, match }) => {
         const formData = new FormData();
         formData.set('password', password);
         formData.set('confirmPassword', confirmPassword);
-
         dispatch(resetPassword(match.params.token, formData))
     }
 

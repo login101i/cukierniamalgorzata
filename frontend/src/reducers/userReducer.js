@@ -58,6 +58,20 @@ export const authReducer = (state = { user: {} }, action) => {
                 user: action.payload
             }
 
+        case LOGOUT_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                user: null,
+                isAuthenticated: false
+            }
+
+        case LOGOUT_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+
 
         case LOGIN_FAIL:
         case REGISTER_USER_FAIL:
@@ -82,25 +96,6 @@ export const authReducer = (state = { user: {} }, action) => {
 }
 
 
-export const logoutReducer = (state = { user: {} }, action) => {
-    switch (action.type) {
-        case LOGOUT_SUCCESS:
-            return {
-                loading: false,
-                success: true,
-                user: null,
-                isAuthenticated: false
-            }
-        case LOGOUT_FAIL:
-            return {
-                ...state,
-                error: action.payload
-            }
-        default:
-            return state
-    }
-
-}
 
 export const userReducer = (state = {}, action) => {
     switch (action.type) {

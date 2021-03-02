@@ -222,18 +222,19 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 
         const config = {
             headers: {
-                'contentType': "application/json"
+                'ContentType': "application/json"
             }
         }
 
         const { data } = await axios.put(`/api/v1/password/reset/${token}`, passwords, config)
+        console.log("To jest data z userAction", data)
 
         dispatch({
             type: NEW_PASSWORD_SUCCESS,
-            payload: data.message
+            payload: data.success
         })
         console.log("To jest data.message z userAction", data.message)
-        
+
     } catch (error) {
         dispatch({
             type: NEW_PASSWORD_FAIL,
