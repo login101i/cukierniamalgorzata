@@ -10,6 +10,7 @@
 
 # production
 /build
+/backend/config/config
 
 # misc
 .DS_Store
