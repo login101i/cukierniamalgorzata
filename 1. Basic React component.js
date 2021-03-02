@@ -24,16 +24,17 @@ class App extends Component {
         return (
             <>
                 <button onClick={this.toogleShowHide} type="button">Pokaż/Ukryj</button>
-                {this.state.isDisplayed ? <HelloReact1 hello={Hello} /> : null}
+                {/* {this.state.isDisplayed ? <HelloReact1 hello={Hello} /> : null} */}
+                <HelloReact1 hello={Hello} idDisplayed={this.state.isDisplayed} />
                 <HelloReact1 hello={Hello} />
-                <HelloReact2 hello={{ text: "Witam z komponentu funkcyjnego :)"}} />
+                <HelloReact2 hello={{ text: "Witam z komponentu funkcyjnego :)" }} />
             </>
         )
     }
 }
 
 class HelloReact1 extends Component {
-    reder() {
+    render() {
         return (
             <div>
                 <h1> {this.props.hello}</h1>
@@ -42,7 +43,10 @@ class HelloReact1 extends Component {
     }
 }
 
-const HelloReact2 = ({ hello }) => <h1>{hello.text}</h1>
-
+const HelloReact2 = ({ hello, isDisplayed }) => {
+    return (
+        isDisplayed ? <h1>{hello}</h1> : null
+    )
+}
 
 export default App
