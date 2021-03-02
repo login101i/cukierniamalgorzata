@@ -91,11 +91,12 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
     // Get reset token
     const resetToken = user.getResetPasswordToken();
+    console.log("To jest reset token", resetToken)
 
     await user.save({ validateBeforeSave: false });
 
     // Create reset password url
-    const resetUrl = `${req.protocol}://${req.get('host')}/password/reset/${resetToken}`;
+    const resetUrl = `${process.env.FRONT_END_URL}/password/reset/${resetToken}`;
 
 
     const message = `Twoje hasło resetujące token jest następujące:\n\n${resetUrl}\n\nJeśli nie chciałeś resetowego email, zignoruj tę wiadomość.`
@@ -131,6 +132,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
         resetPasswordToken,
         resetPasswordExpire: { $gt: Date.now() }
     })
+    console.log("To jest user koleżko ", user)
 
     if (!user) {
         return next(new ErrorHandler('Hasło resetujące jest nieprawidłowe lub token wygasł', 400))
@@ -147,6 +149,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
     await user.save();
     sendToken(user, 200, res)
+    console.log(user)
 
 })
 

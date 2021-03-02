@@ -28,6 +28,10 @@ import {
     FORGOT_PASSWORD_SUCCESS,
     FORGOT_PASSWORD_FAIL,
 
+    NEW_PASSWORD_REQUEST,
+    NEW_PASSWORD_SUCCESS,
+    NEW_PASSWORD_FAIL,
+
     CLEAR_ERRORS
 } from '../constants/userConstants'
 
@@ -209,7 +213,34 @@ export const forgotPassword = (email) => async (dispatch) => {
     }
 }
 
+export const resetPassword = (token, passwords) => async (dispatch) => {
 
+    try {
+        dispatch({
+            type: NEW_PASSWORD_REQUEST
+        })
+
+        const config = {
+            headers: {
+                'contentType': "application/json"
+            }
+        }
+
+        const { data } = await axios.put(`/api/v1/password/reset/${token}`, passwords, config)
+
+        dispatch({
+            type: NEW_PASSWORD_SUCCESS,
+            payload: data.message
+        })
+        console.log("To jest data.message z userAction", data.message)
+        
+    } catch (error) {
+        dispatch({
+            type: NEW_PASSWORD_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
 
 
 // Clear Errors
