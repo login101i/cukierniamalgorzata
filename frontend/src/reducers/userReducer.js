@@ -11,6 +11,8 @@ import {
     LOAD_USER_SUCCESS,
     LOAD_USER_FAIL,
 
+    LOGOUT_SUCCESS,
+    LOGOUT_FAIL,
 
 
     CLEAR_ERRORS
@@ -58,4 +60,25 @@ export const authReducer = (state = { user: {} }, action) => {
         default:
             return state
     }
+}
+
+
+export const logoutReducer = (state = { user: {} }, action) => {
+    switch (action.type) {
+        case LOGOUT_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                user: null,
+                isAuthenticated: false
+            }
+        case LOGOUT_FAIL:
+            return {
+                ...state,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+
 }

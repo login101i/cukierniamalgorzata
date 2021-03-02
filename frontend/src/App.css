@@ -77,6 +77,9 @@ body {
   overflow-x: hiddenA;
 }
 
+span{
+  color:rgb(30, 30, 32);
+}
 /* Scroll Bar */
 
 ::-webkit-scrollbar-track {
@@ -96,7 +99,7 @@ body {
 }
 
 nav {
-  background-color: #232f3e;
+  background-color: white;
   padding: 1rem 1rem;
 }
 
@@ -605,10 +608,11 @@ footer {
   margin-right: 0.3rem;
 }
 
+/* what the fuck is this?? */
 #sidebar ul li.active > a,
 a[aria-expanded='true'] {
   color: #fff;
-  background: #232f3e;
+  background: #c7c7c7;
 }
 a[data-toggle='collapse'] {
   position: relative;
