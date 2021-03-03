@@ -3,7 +3,7 @@ const router =express.Router()
 
 const { getProducts, newProduct, getSingleProduct, updateProduct, deleteProduct, createProductReview,
     getProductReviews,
-    deleteReview} = require('../controllers/productControllers')
+    deleteReview, applyCouponToUserCart} = require('../controllers/productControllers')
 
 const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth')
 
@@ -13,6 +13,7 @@ router.post('/admin/product/new', isAuthenticatedUser, authorizeRoles('admin'), 
 router.get('/product/:id', getSingleProduct)
 router.put('/admin/product/:id',  updateProduct)
 router.delete('/admin/product/:id', deleteProduct)
+router.post("/cart/coupon", applyCouponToUserCart);
 
 router.put('/review', isAuthenticatedUser, createProductReview)
 router.get('/reviews', isAuthenticatedUser, authorizeRoles('admin'), getProductReviews)

@@ -114,6 +114,8 @@ const Cart = ({ history }) => {
                                     >Do kasy</button>
                                 </div>
                             </div>
+
+                            
                         </div>
                     </Fragment>
                 )}

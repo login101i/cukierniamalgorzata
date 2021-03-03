@@ -1,4 +1,5 @@
 const Product = require('../models/product')
+const Coupon = require("../models/coupon");
 const ErrorHandler = require("../utils/ErrorHandler")
 const catchAsynchErrors = require("../middlewares/catchAsyncErrors")
 const APIFeatures = require("../utils/apiFeatures")
@@ -95,6 +96,44 @@ exports.deleteProduct = catchAsynchErrors(async (req, res, next) => {
         product
     })
 })
+
+exports.applyCouponToUserCart = catchAsynchErrors(async (req, res, next) => {
+    const { coupon } = req.body;
+    const { cartTotal } = req.body;
+    console.log(coupon)
+    console.log(cartTotal)
+
+    console.log("_ _ 7    COUPON to : ", coupon);
+
+    const validCoupon = await Coupon.findOne({ name: coupon }).exec();
+    // możesz zrobić też to poniższym sposobem
+    // if (validCoupon === null) {
+    //     return res.json({
+    //         err: "Kupon nie jest prawidłowy.",
+    //     });
+    // }
+    if (!validCoupon) {
+        res.status(200).json({
+            message: "Error",
+
+        })
+        return next(new ErrorHandler("Nie odnaleziono takiego kuponu", 404))
+
+    }
+    console.log("_ _ 8 KUPON JEST OK ", validCoupon);
+    console.log("discount w %", validCoupon.discount);
+    let totalAfterDiscount = (
+        cartTotal -
+        (cartTotal * validCoupon.discount) / 100
+    ).toFixed(2); // 99.99
+    console.log(" _ _ 10 ----------> ", totalAfterDiscount);
+
+    res.status(200).json({
+        message: "Pomyślnie znaleziono cupon",
+        totalAfterDiscount
+    })
+});
+
 
 // --------------------------------------------------------
 
