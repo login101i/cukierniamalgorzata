@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 
 import MetaData from '../layout/MetaData'
 import CheckoutSteps from './CheckoutSteps'
@@ -31,10 +31,62 @@ const Payment = ({ history }) => {
     const { user } = useSelector(state => state.auth)
     const { cartItems, shippingInfo } = useSelector(state => state.cart);
 
+    useEffect(() => {
 
+    })
+
+    const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
+    const paymentData = {
+        amount: Math.round(orderInfo.totalPrice * 100)
+    }
 
     const submitHandler = async (e) => {
         e.preventDefault();
+
+        document.querySelector('#pay_btn').disabled = true;
+        let res;
+        try {
+
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+            // tutaj pobieramy client secret z backend'u
+            res = await axios.post('/api/v1/payment/process', paymentData, config)
+            const clientSecret = res.data.client_secret;
+            console.log(clientSecret);
+            if (!stripe || !elements) {
+                return;
+            }
+
+            const result = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: elements.getElement(CardNumberElement),
+                    billing_details: {
+                        name: user.name,
+                        email: user.email
+                    }
+                }
+            });
+
+            if (result.error) {
+                alert.error(result.error.message);
+                document.querySelector('#pay_btn').disabled = false;
+            } else {
+                // The payment is processed or not
+                if (result.paymentIntent.status === 'succeeded') {
+
+                    history.push('/success')
+                } else {
+                    alert.error('Powstały błędy podczas procesu płatności')
+                }
+            }
+        } catch (error) {
+            document.querySelector('#pay_btn').disabled = false;
+            alert.error(error.response.data.message)
+            // Czym jest ten response message?
+        }
     }
 
     return (
@@ -83,7 +135,7 @@ const Payment = ({ history }) => {
                             type="submit"
                             className="btn btn-block py-3"
                         >
-                            Zapłać
+                            Zapłać {` - ${orderInfo && orderInfo.totalPrice} zł`}
                         </button>
 
                     </form>

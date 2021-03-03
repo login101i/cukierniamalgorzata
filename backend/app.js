@@ -5,11 +5,9 @@ const errrorMiddleware = require('./middlewares/errors')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
+const dotenv = require('dotenv')
 
-
-
-
-
+dotenv.config({ path: 'backend/config/config.env' })
 
 
 // importuję routy

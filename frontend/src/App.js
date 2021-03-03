@@ -34,6 +34,7 @@ import { loadStripe } from '@stripe/stripe-js'
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState('');
+  console.log(stripeApiKey)
 
 
   useEffect(() => {
