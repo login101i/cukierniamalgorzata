@@ -4,6 +4,8 @@ import MetaData from '../layout/MetaData'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { saveShippingInfo } from '../../actions/cartActions'
+import CheckoutSteps from './CheckoutSteps'
+
 
 const Shipping = ({ history }) => {
 
@@ -19,12 +21,16 @@ const Shipping = ({ history }) => {
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(saveShippingInfo({ address, city, phoneNo, postalCode }))
-        history.push('/confirm')
+        history.push('/order/confirm')
     }
 
     return (
         <Fragment>
             <MetaData title={'Informacje o dostawie'} />
+            <div className="row mt-5">
+                <CheckoutSteps shipping />
+            </div>
+
 
             <div className="row wrapper">
                 <div className="col-10 col-lg-5">
