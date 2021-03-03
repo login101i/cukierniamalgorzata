@@ -11,7 +11,6 @@ exports.create = catchAsyncErrors(async (req, res, next) => {
         expiry,
         discount
     })
-
     res.status(200).json({
         success: true,
         coupon
