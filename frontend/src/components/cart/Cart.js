@@ -5,7 +5,7 @@ import MetaData from '../layout/MetaData'
 
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItemToCart , removeItemFromCart} from '../../actions/cartActions'
+import { addItemToCart, removeItemFromCart } from '../../actions/cartActions'
 
 const Cart = ({ history }) => {
 
@@ -13,7 +13,7 @@ const Cart = ({ history }) => {
 
     const { cartItems } = useSelector(state => state.cart)
 
-        const increaseQty = (id, quantity, stock) => {
+    const increaseQty = (id, quantity, stock) => {
         const newQty = quantity + 1;
         if (newQty > stock) return;
         dispatch(addItemToCart(id, newQty))
@@ -26,8 +26,12 @@ const Cart = ({ history }) => {
         dispatch(addItemToCart(id, newQty))
     }
 
-    const removeItemfromCartHandler=(id)=>{
-            dispatch(removeItemFromCart(id))
+    const removeItemfromCartHandler = (id) => {
+        dispatch(removeItemFromCart(id))
+    }
+
+    const checkoutHandler = () => {
+        history.push('/login?redirect=shipping')
     }
 
 
@@ -35,80 +39,84 @@ const Cart = ({ history }) => {
         <Fragment>
             <MetaData title={'Twój koszyk'} />
             {cartItems.length === 0 ? <h2 className="mt-5 d-flex justify-content-center"
-            
+
             >Twój koszyk jest pusty.</h2> : (
-                <Fragment>
-                    <h2 className="mt-5">Twój koszyk: <b>{cartItems.length} pozycji.</b></h2>
+                    <Fragment>
+                        <h2 className="mt-5 d-flex justify-content-center">Twój koszyk: <b>{cartItems.length}  pozycje.</b></h2>
 
-                    <div className="row d-flex justify-content-between">
-                        <div className="col-12 col-lg-8">
+                        <div className="row d-flex justify-content-center">
+                            <div className="col-12 col-lg-7">
 
-                            {cartItems.map(item => (
-                                <Fragment>
-                                    <hr />
+                                {cartItems.map(item => (
+                                    <Fragment>
+                                        <hr />
 
-                                    <div className="cart-item" key={item.product}>
-                                        <div className="row">
-                                            <div className="col-4 col-lg-3">
-                                                <img src={item.image} alt="Tort" height="90" width="115" />
-                                            </div>
-
-                                            <div className="col-5 col-lg-3">
-                                                <Link to={`/products/${item.product}`}>{item.name}</Link>
-                                            </div>
-
-
-                                            <div className="col-4 col-lg-2 mt-4 mt-lg-0">
-                                                <p id="card_item_price">{item.price} zł</p>
-                                            </div>
-
-                                            <div className="col-4 col-lg-3 mt-4 mt-lg-0">
-                                                <div className="stockCounter d-inline">
-                                                    <span className="btn btn-danger minus"
-                                                    onClick={()=>decreaseQty(item.product, item.quantity)}
-                                                    
-                                                    >-</span>
-
-                                                    <input type="number" className="form-control count d-inline" value={item.quantity} readOnly 
-                                                    
-                                                    />
-
-                                                    <span
-                                                     className="btn btn-primary plus"
-                                                     onClick={()=>increaseQty(item.product, item.quantity)}
-
-                                                    >+</span>
+                                        <div className="cart-item" key={item.product}>
+                                            <div className="row">
+                                                <div className="col-4 col-lg-3">
+                                                    <img src={item.image} alt="Tort" height="90" width="115" />
                                                 </div>
-                                            </div>
 
-                                            <div className="col-4 col-lg-1 mt-4 mt-lg-0">
-                                                <i id="delete_cart_item" className="fa fa-trash btn btn-danger" 
-                                                onClick={()=>removeItemfromCartHandler(item.product)}
-                                                 ></i>
-                                            </div>
+                                                <div className="col-5 col-lg-3">
+                                                    <Link to={`/products/${item.product}`}>{item.name}</Link>
+                                                </div>
 
+
+                                                <div className="col-4 col-lg-2 mt-4 mt-lg-0">
+                                                    <p id="card_item_price">{item.price} zł</p>
+                                                </div>
+
+                                                <div className="col-4 col-lg-3 mt-4 mt-lg-0">
+                                                    <div className="stockCounter d-inline">
+                                                        <span className="btn btn-danger minus"
+                                                            onClick={() => decreaseQty(item.product, item.quantity)}
+
+                                                        >-</span>
+
+                                                        <input type="number" className="form-control count d-inline" value={item.quantity} readOnly
+
+                                                        />
+
+                                                        <span
+                                                            className="btn btn-primary plus"
+                                                            onClick={() => increaseQty(item.product, item.quantity)}
+
+                                                        >+</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="col-4 col-lg-1 mt-4 mt-lg-0">
+                                                    <i id="delete_cart_item" className="fa fa-trash btn btn-danger"
+                                                        onClick={() => removeItemfromCartHandler(item.product)}
+                                                    ></i>
+                                                </div>
+
+                                            </div>
                                         </div>
-                                    </div>
+                                        <hr />
+                                    </Fragment>
+                                ))}
+
+                            </div>
+
+                            <div className="col-12 col-lg-3 my-4">
+                                <div id="order_summary">
+                                    <h4>Podsumowanie</h4>
                                     <hr />
-                                </Fragment>
-                            ))}
+                                    <p>Razem:  <span className="order-summary-values">{cartItems.reduce((acc, item) => (acc + Number(item.quantity)), 0)} (Pozycji)</span></p>
+                                    <p>Razem razem: <span className="order-summary-values">{cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)} zł</span></p>
 
-                        </div>
-
-                        <div className="col-12 col-lg-3 my-4">
-                            <div id="order_summary">
-                                <h4>Podsumowanie</h4>
-                                <hr />
-                                <p>Razem:  <span className="order-summary-values">{cartItems.reduce((acc, item) => (acc + Number(item.quantity)), 0)} (Pozycji)</span></p>
-                                <p>Razem razem: <span className="order-summary-values">{cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2)} zł</span></p>
-
-                                <hr />
-                                <button id="checkout_btn" className="btn btn-primary btn-block">Do kasy</button>
+                                    <hr />
+                                    <button
+                                        id="checkout_btn"
+                                        className="btn btn-primary btn-block"
+                                        onClick={checkoutHandler}
+                                    >Do kasy</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </Fragment>
-            )}
+                    </Fragment>
+                )}
         </Fragment>
     )
 }

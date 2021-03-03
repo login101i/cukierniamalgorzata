@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ADD_TO_CART, REMOVE_ITEM_FROM_CART  } from '../constants/cartConstants'
+import { ADD_TO_CART, REMOVE_ITEM_FROM_CART, SAVE_SHIPPING_INFO } from '../constants/cartConstants'
 
 
 export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
@@ -22,13 +22,23 @@ export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 
-export const removeItemFromCart=(id)=>async (dispatch, getState)=>{
+export const removeItemFromCart = (id) => async (dispatch, getState) => {
     dispatch({
         type: REMOVE_ITEM_FROM_CART,
-        payload:id
+        payload: id
     })
     // po uruchomieniu akcji type uruchomi się cartReducer i usunie z cartItems produkt. Teraz możemy zapisać go do localstorage
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+}
+
+export const saveShippingInfo = (data) => async (dispatch) => {
+
+    dispatch({
+        type: SAVE_SHIPPING_INFO,
+        payload: data
+    })
+
+    localStorage.setItem("ShippingInfo", JSON.stringify(data))
 }
 
 
