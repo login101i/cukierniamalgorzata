@@ -30,6 +30,8 @@ exports.newOrder = catchAsyncErrors(async (req, res, next) => {
         // Here remember of _
     })
 
+    console.log(order)
+
     res.status(200).json({
         success: true,
         order
@@ -122,6 +124,6 @@ exports.deleteOrder = catchAsyncErrors(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        message:`Usunięto następujące zamówienie: ${order}`
+        message: `Usunięto następujące zamówienie: ${order}`
     })
 })
