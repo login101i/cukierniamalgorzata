@@ -27,6 +27,8 @@ import OrderSuccess from './components/cart/OrderSuccess'
 
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import ListOrders from './components/orders/ListOrders'
+
 
 
 
@@ -75,6 +77,8 @@ function App() {
           </Elements>
         }
         <ProtectedRoute path="/success" component={OrderSuccess} exact />
+        <ProtectedRoute path="/orders/me" component={ListOrders} exact />
+
 
       </div>
 
