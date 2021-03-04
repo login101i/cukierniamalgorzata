@@ -30,6 +30,8 @@ import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import ListOrders from './components/orders/ListOrders'
 import OrderDetails from './components/orders/OrderDetails'
+import Dashboard from './components/admin/Dashboard'
+
 
 
 
@@ -82,6 +84,8 @@ function App() {
         <ProtectedRoute path="/success" component={OrderSuccess} exact />
         <ProtectedRoute path="/orders/me" component={ListOrders} exact />
         <ProtectedRoute path="/order/:id" component={OrderDetails} exact />
+        <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />
+
 
 
 
