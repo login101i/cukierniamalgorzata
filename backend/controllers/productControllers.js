@@ -50,7 +50,6 @@ exports.newProduct = catchAsynchErrors(async (req, res, next) => {
 
 exports.getSingleProduct = catchAsynchErrors(async (req, res, next) => {
     const product = await Product.findById(req.params.id)
-    console.log(product)
 
     if (!product) {
         // constructor(message, statusCode)
@@ -100,10 +99,9 @@ exports.deleteProduct = catchAsynchErrors(async (req, res, next) => {
 exports.applyCouponToUserCart = catchAsynchErrors(async (req, res, next) => {
     const { coupon } = req.body;
     const { cartTotal } = req.body;
-    console.log(coupon)
-    console.log(cartTotal)
 
-    console.log("_ _ 7    COUPON to : ", coupon);
+
+
 
     const validCoupon = await Coupon.findOne({ name: coupon }).exec();
     // możesz zrobić też to poniższym sposobem
@@ -120,13 +118,13 @@ exports.applyCouponToUserCart = catchAsynchErrors(async (req, res, next) => {
         return next(new ErrorHandler("Nie odnaleziono takiego kuponu", 404))
 
     }
-    console.log("_ _ 8 KUPON JEST OK ", validCoupon);
-    console.log("discount w %", validCoupon.discount);
+    // console.log("_ _ 8 KUPON JEST OK ", validCoupon);
+    // console.log("discount w %", validCoupon.discount);
     let totalAfterDiscount = (
         cartTotal -
         (cartTotal * validCoupon.discount) / 100
     ).toFixed(2); // 99.99
-    console.log(" _ _ 10 ----------> ", totalAfterDiscount);
+    // console.log(" _ _ 10 ----------> ", totalAfterDiscount);
 
     res.status(200).json({
         message: "Pomyślnie znaleziono cupon",
@@ -195,7 +193,6 @@ exports.deleteReview = catchAsynchErrors(async (req, res, next) => {
     // {{DOMAIN}}/api/v1/review?productId=6014c71c3f26980af475a7cb&id=6015b91b7cb1c027b4657844
     const product = await Product.findById(req.query.productId);
 
-    console.log(product);
 
     const reviews = product.reviews.filter(review => review._id.toString() !== req.query.id.toString());
 
