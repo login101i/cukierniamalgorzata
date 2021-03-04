@@ -22,12 +22,15 @@ import {
     NEW_PRODUCT_SUCCESS,
     NEW_PRODUCT_FAIL,
 
+    DELETE_PRODUCT_REQUEST,
+    DELETE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_FAIL,
 
     CLEAR_ERRORS
 
 } from '../constants/productConstants'
 
-export const getProducts = (activePage = 1, keyword = '', price = [1, 1000], category, star=0) => async (dispatch) => {
+export const getProducts = (activePage = 1, keyword = '', price = [1, 1000], category, star = 0) => async (dispatch) => {
 
     try {
         dispatch({
@@ -76,28 +79,28 @@ export const getProductDetails = (id) => async (dispatch) => {
     }
 }
 
-export const newReview=(reviewData)=>async(dispatch)=>{
-    try{
+export const newReview = (reviewData) => async (dispatch) => {
+    try {
         dispatch({
             type: NEW_REVIEW_REQUEST
         })
 
-        const config={
-            headers:{
+        const config = {
+            headers: {
                 'Content-Type': 'application/json'
             }
         }
 
-        const {data}=await axios.put('/api/v1/review', reviewData, config)
+        const { data } = await axios.put('/api/v1/review', reviewData, config)
 
         dispatch({
-            type:NEW_REVIEW_SUCCESS,
-            payload:data.success
+            type: NEW_REVIEW_SUCCESS,
+            payload: data.success
         })
 
-    }catch(error){
+    } catch (error) {
         dispatch({
-            type:NEW_REVIEW_FAIL
+            type: NEW_REVIEW_FAIL
         })
     }
 }
@@ -152,6 +155,27 @@ export const newProduct = (productData) => async (dispatch) => {
 }
 
 
+
+// Delete product (Admin)
+export const deleteProduct = (id) => async (dispatch) => {
+    try {
+
+        dispatch({ type: DELETE_PRODUCT_REQUEST })
+
+        const { data } = await axios.delete(`/api/v1/admin/product/${id}`)
+
+        dispatch({
+            type: DELETE_PRODUCT_SUCCESS,
+            payload: data.success
+        })
+
+    } catch (error) {
+        dispatch({
+            type: DELETE_PRODUCT_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
 
 
 // Clear Errors
