@@ -15,6 +15,8 @@ const Dashboard = () => {
     const dispatch = useDispatch();
     const { products } = useSelector(state => state.products)
     const { orders, totalAmount, loading } = useSelector(state => state.allOrders)
+    const { users } = useSelector(state => state.allUsers)
+
 
 
 
@@ -90,7 +92,7 @@ const Dashboard = () => {
                                 <div className="col-xl-3 col-sm-6 mb-3">
                                     <div className="card text-white bg-info o-hidden h-100">
                                         <div className="card-body">
-                                            <div className="text-center card-font-size">Użytkownicy<br /> <b>111</b></div>
+                                            <div className="text-center card-font-size">Użytkownicy<br /><b>{users && users.length}</b></div>
                                         </div>
                                         <Link className="card-footer text-white clearfix small z-1" to="/admin/users">
                                             <span className="float-left">Zobacz szczegóły</span>
