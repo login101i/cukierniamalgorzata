@@ -1,7 +1,7 @@
 const User = require('../models/user')
 
 const jwt = require("jsonwebtoken");
-const ErrorHandler = require("../utils/ErrorHandler");
+const ErrorHandler = require("./ErrorHandler2");
 const catchAsyncErrors = require("./catchAsyncErrors");
 
 // Checks if user is authenticated or not
