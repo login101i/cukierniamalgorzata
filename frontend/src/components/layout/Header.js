@@ -20,7 +20,7 @@ const Header = () => {
 
 
     const { user, loading } = useSelector(state => state.auth)
-    console.log("To jest user koleżko z Headera, user", user)
+    
 
     useEffect(() => {
         window.addEventListener("scroll", () => {

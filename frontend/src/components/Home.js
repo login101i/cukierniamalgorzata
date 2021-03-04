@@ -12,7 +12,6 @@ import Pagination from 'react-js-pagination'
 
 import { Menu, Slider, Checkbox } from "antd";
 import { MailOutlined } from '@ant-design/icons';
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import Star from "../components/layout/Star"
 
 

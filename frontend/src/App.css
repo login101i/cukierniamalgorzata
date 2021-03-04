@@ -683,14 +683,14 @@ ul.CTAs a {
 }
 
 .orange {
-  color: #fa9c23;
+  color: #fa9c23 !important;
 }
 
 .yellow {
-  color: #fdcc0d;
+  color: #fdcc0d !important;
 }
 
 .review_user {
   font-size: 0.8rem;
-  color: grey;
+  color: rgb(42, 53, 51);
 }

@@ -20,7 +20,6 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
         crop: "scale"
     })
 
-    console.log(result)
 
 
     const { name, email, password } = req.body;
@@ -149,7 +148,6 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
     await user.save();
     sendToken(user, 200, res)
-    console.log(user)
 
 })
 

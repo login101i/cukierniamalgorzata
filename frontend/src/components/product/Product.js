@@ -6,8 +6,7 @@ import Star from '../layout/Star'
 
 const Product = ({ loading, product, col }) => {
 
-    console.log(product)
-    console.log(product.ratings)
+
 
     return (
 

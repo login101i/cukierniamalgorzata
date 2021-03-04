@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
+import 'antd/dist/antd.less'; // or 'antd/dist/antd.less'
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { loadUser } from './actions/userActions'
