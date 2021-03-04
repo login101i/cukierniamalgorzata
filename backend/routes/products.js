@@ -16,8 +16,6 @@ router.delete('/admin/product/:id', deleteProduct)
 router.post("/cart/coupon", applyCouponToUserCart);
 router.get('/admin/products', getAdminProducts)
 
-
-
 router.put('/review', isAuthenticatedUser, createProductReview)
 router.get('/reviews', isAuthenticatedUser, authorizeRoles('admin'), getProductReviews)
 router.delete('/review', isAuthenticatedUser, authorizeRoles('admin'), deleteReview)

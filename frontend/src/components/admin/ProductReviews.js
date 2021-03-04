@@ -37,7 +37,7 @@ const ProductReviews = () => {
         }
 
         if (isDeleted) {
-            alert.success('Review deleted successfully');
+            alert.success('Opinia została usunięta.');
             dispatch({ type: DELETE_REVIEW_RESET })
         }
 
