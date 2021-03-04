@@ -1,7 +1,7 @@
 const app = require('./app.js')
 const colors = require("colors")
 const dotenv = require('dotenv')
-const connectDatabase = require('./config/database')
+const connectDatabase = require('./config/dataBase')
 const cloudinary = require('cloudinary')
 
 
