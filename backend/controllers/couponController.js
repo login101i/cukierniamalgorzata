@@ -1,5 +1,5 @@
 const Coupon = require("../models/coupon");
-const ErrorHandler = require('../utils/ErrorHandler');
+const ErrorHandler = require('../middlewares/ErrorHandler2');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 // create, remove, list
 
