@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { loadUser } from './actions/userActions'
 import store from './store'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
+
 
 
 import Header from './components/layout/Header'
@@ -32,6 +34,8 @@ import ListOrders from './components/orders/ListOrders'
 import OrderDetails from './components/orders/OrderDetails'
 import Dashboard from './components/admin/Dashboard'
 import ProductsList from './components/admin/ProductsList'
+import NewProduct from './components/admin/NewProduct'
+
 
 
 
@@ -57,6 +61,9 @@ function App() {
     getStripApiKey();
 
   }, [])
+
+  const { user, isAuthenticated, loading } = useSelector(state => state.auth)
+
 
 
   return (
@@ -87,13 +94,17 @@ function App() {
         <ProtectedRoute path="/order/:id" component={OrderDetails} exact />
         <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />
         <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />
+        <ProtectedRoute path="/admin/product" isAdmin={true} component={NewProduct} exact />
 
 
 
 
       </div>
 
-      <Footer />
+
+      {!loading && (!isAuthenticated || user.role !== 'admin') && (
+        <Footer />
+      )}
 
     </Router>
   );
