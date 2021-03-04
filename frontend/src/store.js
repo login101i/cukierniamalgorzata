@@ -3,10 +3,10 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 
-import { productsReducer, productDetailsReducer, newReviewReducer, newProductReducer, productReducer } from './reducers/productReducers'
+import { productsReducer, productDetailsReducer, newReviewReducer, newProductReducer, productReducer, reviewReducer, productReviewsReducer } from './reducers/productReducers'
 import { authReducer, userReducer, forgotPasswordReducer, allUsersReducer, userDetailsReducer } from './reducers/userReducer'
 import { cartReducer } from './reducers/cartReducer'
-import { newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer, orderReducer } from './reducers/orderReducer'
+import { newOrderReducer, myOrdersReducer, orderDetailsReducer, allOrdersReducer, orderReducer, } from './reducers/orderReducer'
 
 
 
@@ -26,7 +26,10 @@ const reducer = combineReducers({
     allOrders: allOrdersReducer,
     order: orderReducer,
     allUsers: allUsersReducer,
-    userDetails: userDetailsReducer
+    userDetails: userDetailsReducer,
+    productReviews: productReviewsReducer,
+    review: reviewReducer
+
 })
 
 
