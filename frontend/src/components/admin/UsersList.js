@@ -28,7 +28,7 @@ const UsersList = ({ history }) => {
         }
 
         if (isDeleted) {
-            alert.success('User deleted successfully');
+            alert.success('Użytkownik usunięty');
             history.push('/admin/users');
             dispatch({ type: DELETE_USER_RESET })
         }
@@ -43,27 +43,27 @@ const UsersList = ({ history }) => {
         const data = {
             columns: [
                 {
-                    label: 'User ID',
+                    label: 'ID użytkownika',
                     field: 'id',
                     sort: 'asc'
                 },
                 {
-                    label: 'Name',
+                    label: 'Imię',
                     field: 'name',
                     sort: 'asc'
                 },
                 {
-                    label: 'Email',
+                    label: 'E-mail',
                     field: 'email',
                     sort: 'asc'
                 },
                 {
-                    label: 'Role',
+                    label: 'Rola',
                     field: 'role',
                     sort: 'asc'
                 },
                 {
-                    label: 'Actions',
+                    label: 'Akcje',
                     field: 'actions',
                 },
             ],
