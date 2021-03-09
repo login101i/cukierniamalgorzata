@@ -2,6 +2,7 @@ import React from "react";
 import StarRating from "react-star-ratings";
 
 const Star = ({ starClick, numberOfStars, rating}) => (
+    
     <>
         <StarRating
             changeRating={() => starClick(numberOfStars)}
@@ -17,6 +18,7 @@ const Star = ({ starClick, numberOfStars, rating}) => (
 
         />
         <br />
+
     </>
 );
 

@@ -20,7 +20,8 @@ const Header = () => {
 
 
     const { user, loading } = useSelector(state => state.auth)
-    
+    const { cartItems } = useSelector(state => state.cart)
+
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -38,17 +39,25 @@ const Header = () => {
         alert.success('Wylogowano.')
     }
 
-
     return (
         <>
-            <nav className={`navbar navbar-expand-lg navbar-light bg-light nav ${show && "nav_black"}  `}>
-                <Link to="/">
+            <nav className={`navbar navbar-expand-lg navbar-light bg-light nav ${show && "nav_black"}`}>
+                <Link to="/" style={{ flex: 1 }}>
                     <img
                         // className="nav_logoLeft"
-                        src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg"
+                        src='https://scontent-frt3-1.xx.fbcdn.net/v/t1.0-9/1982023_674726905944253_1985470084_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=K7iqSSDLQSwAX_JcJzW&_nc_ht=scontent-frt3-1.xx&oh=1d356350d07a7ba754b791e7a0da0511&oe=606B7C1C'
                         alt=" Movie DataBase Logo"
                         style={{ width: '54px', marginLeft: '30px' }}
                     />
+                </Link>
+
+                <Link to="cart">
+                    <i className="fas fa-cart-plus fa-2x fasIcon m-3 relative ">
+                        <div className="cartBadge"
+                            style={{ fontSize: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        >{cartItems.length === 0 ? "" : cartItems.length}</div>
+
+                    </i>
                 </Link>
 
                 <button className={`navbar-toggler ${show && " nav_white"} `} type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

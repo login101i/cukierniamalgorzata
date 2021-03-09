@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
-import 'antd/dist/antd.less'; // or 'antd/dist/antd.less'
+// import 'antd/dist/antd.less'; // or 'antd/dist/antd.less'
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { loadUser } from './actions/userActions'
@@ -91,7 +91,7 @@ function App() {
         <ProtectedRoute path="/success" component={OrderSuccess} exact />
         <ProtectedRoute path="/orders/me" component={ListOrders} exact />
         <ProtectedRoute path="/order/:id" component={OrderDetails} exact />
-        <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />
+        <Route path="/dashboard"  component={Dashboard} exact />
         <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />
         <ProtectedRoute path="/admin/product" isAdmin={true} component={NewProduct} exact />
         <ProtectedRoute path="/admin/product/:id" isAdmin={true} component={UpdateProduct} exact />

@@ -1,9 +1,9 @@
 *{
-  color:rgb(238, 237, 237)
+  color:rgb(39, 39, 39)
 }
 
 .App{
-  background:rgb(199, 199, 199);
+  background:rgb(139, 138, 138);
   margin-top:80px;
   min-height:100vh;
 }
@@ -41,7 +41,7 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 20%;
+  margin-top: 400px;
   width: 80px;
   height: 80px;
   padding-left: 0;
@@ -216,6 +216,7 @@ footer {
   overflow: hidden;
   width: 0;
   color:#e7c712 ;
+ 
   
 
 }
@@ -258,11 +259,11 @@ footer {
 }
 
 .redColor {
-  color: red;
+  color: rgb(95, 2, 2);
 }
 
 .greenColor {
-  color: green;
+  color: rgb(20, 20, 20);
 }
 
 #product_image {

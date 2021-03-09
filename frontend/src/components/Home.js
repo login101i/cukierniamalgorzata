@@ -116,20 +116,18 @@ const Home = ({ match }) => {
 
                 <Fragment>
                     <MetaData title={'Cukiernia Małgorzata'} />
-                    <div className="container-fluid ">
-                        <div className="row d-flex justify-content-center">
-                            <h1 style={{ paddingTop: "80px" }}>Cukiernia Małgorzata</h1>
+                    <div className="container-fluid d-flex justify-content-center  flex-column align-items-center">
+                        <div className="row d-flex justify-content-center align-items-center ">
+                            <h1 style={{ paddingTop: "40px", textAlign: 'center' }}>Cukiernia Małgorzata</h1>
                         </div>
 
-
                         <section id="products" className=" mt-5">
-                            <div className="row  d-flex justify-content-between m-4">
+                            <div className="row  d-flex justify-content-center  m-4"
+                                style={{ maxWidth: '1600px' }}
+                            >
                                 {keyword ? (
                                     <>
-
-
-
-                                        <div className="col-sm-12  col-md-3 mt-5 mb-5">
+                                        <div className="col-sm-12  col-md-3 mt-2 mb-5">
                                             <h2>Filtry</h2>
                                             <Menu
                                                 mode="inline"
@@ -225,8 +223,8 @@ const Home = ({ match }) => {
                                 itemsCountPerPage={resPerPage}
                                 totalItemsCount={productsCount}
                                 onChange={setCurrentPageNo}
-                                nextPageText={'Następna strona'}
-                                prevPageText={'Poprzednia strona'}
+                                nextPageText={'Następna '}
+                                prevPageText={'Poprzednia '}
                                 itemClass="page-item"
                                 linkClass="page-link"
                             />

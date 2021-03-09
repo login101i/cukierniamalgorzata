@@ -12,6 +12,7 @@ import Star from '../../components/layout/Star'
 import { addItemToCart } from '../../actions/cartActions'
 import { NEW_REVIEW_RESET } from '../../constants/productConstants'
 import ListReviews from './ListReviews'
+import { Link } from 'react-router-dom'
 
 
 
@@ -132,9 +133,9 @@ const ProductDetails = ({ match }) => {
             {loading ? <Loader /> : (
                 <Fragment>
                     <MetaData title={product.name} />
-                    <div className="row d-flex justify-content-around p-3">
-                        <div className="col-12 col-lg-5 img-fluid" id="product_image">
-                            <Carousel pause='hover'>
+                    <div className="row d-flex justify-content-center p-3 ">
+                        <div className="col-12 col-lg-5 p-3" id="product_image">
+                            <Carousel pause='hover' style={{ marginTop: "-100px" }}>
 
                                 {product.images && product.images.map(image => (
                                     <Carousel.Item key={image.public_id}>
@@ -145,24 +146,25 @@ const ProductDetails = ({ match }) => {
                             </Carousel>
                         </div>
 
-                        <div className="col-12 col-lg-5 mt-5 ">
-                            <h3>{product.name}</h3>
-                            <p id="product_id">Product # {product._id}</p>
+                        <div className="col-12 col-lg-5 mt-5 p-3 ">
+                            <h3 className="text-dark">{product.name}</h3>
+                            <p id="product_id" className="text-dark">Product # {product._id}</p>
                             <hr />
 
                             <Star numberOfStars={5} rating={product.ratings} />
-                            <span id="no_of_reviews">({product.numOfReviews} Oceny)</span>
+                            <span className="text-dark" id="no_of_reviews">({product.numOfReviews} Oceny)</span>
                             <hr />
 
                             <p id="product_price">{product.price} zł</p>
                             <div className="stockCounter d-inline">
                                 <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
 
-                                <input type="number" className="form-control count d-inline" value={quantity} readOnly />
+                                <input type="number" className="form-control count d-inline mx-2" value={quantity} readOnly />
 
                                 <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
                             </div>
                             <button type="button" id="cart_btn" className="btn btn-primary d-inline ml-4" disabled={product.stock === 0} onClick={addToCart}>Dodaj do koszyka</button>
+
 
                             <hr />
 
@@ -175,12 +177,16 @@ const ProductDetails = ({ match }) => {
                             <hr />
                             <p id="product_seller mb-3">Sprzedawane przez: <strong>{product.seller}</strong></p>
 
-                            {user ? <button id="review_btn" type="button" className="btn btn-primary mt-4" data-toggle="modal" data-target="#ratingModal" onClick={setUserRatings}>
-                                Dodaj ocenę
+                            <div className="flex flex-column">
+                                {user ? <button id="review_btn" type="button" className="btn btn-primary mt-4" data-toggle="modal" data-target="#ratingModal" onClick={setUserRatings}>
+                                    Dodaj ocenę
                             </button>
-                                :
-                                <div className="alert alert-danger mt-5" type='alert'>Zaloguj się aby dodać ocenę</div>
-                            }
+                                    :
+                                    <div className="alert alert-danger mt-5" type='alert'>Zaloguj się aby dodać ocenę</div>
+                                }
+                                <Link to="/"> <button type="button" id="cart_btn" className="btn btn-dark d-inline mt-4">Wróć do strony głównej</button></Link>
+                            </div>
+
 
 
                             <div className="row mt-2 mb-5">
